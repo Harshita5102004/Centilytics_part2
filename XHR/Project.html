@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Finder (XHR)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #user-container {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            display: inline-block;
+            min-width: 250px;
+        }
+        #error {
+            color: red;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Random User Finder</h2>
+    <button id="fetch-user">Get Random User</button>
+
+    <div id="user-container">
+        <p id="loading" style="display: none;">Loading...</p>
+        <p id="error">Failed to fetch user!</p>
+        <p><strong>Name:</strong> <span id="name">-</span></p>
+        <p><strong>Email:</strong> <span id="email">-</span></p>
+        <p><strong>Address:</strong> <span id="address">-</span></p>
+    </div>
+
+
+
+
+
+
+
+
+    <script>
+        const user =  document.getElementById("fetch-user");
+        user.addEventListener("click", () => {
+    const url = "https://jsonplaceholder.typicode.com/users";
+
+    // Show loading text
+    document.getElementById("loading").style.display = "block";
+    document.getElementById("error").style.display = "none";
+
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", url, true);
+    xhr.responseType = "json";
+
+    xhr.onload = function () {
+
+        console.log(xhr);
+        document.getElementById("loading").style.display = "none";
+
+        if (xhr.status >= 200 && xhr.status < 300) {
+            let users = xhr.response;
+            let randomUser = users[Math.floor(Math.random() * users.length)];
+
+            document.getElementById("name").textContent = randomUser.name;
+            document.getElementById("email").textContent = randomUser.email;
+            document.getElementById("address").textContent = `${randomUser.address.street}, ${randomUser.address.city}`;
+        } else {
+            document.getElementById("error").style.display = "block";
+        }
+    };
+
+    xhr.onerror = function () {
+        document.getElementById("loading").style.display = "none";
+        document.getElementById("error").style.display = "block";
+    };
+
+    xhr.send();
+});
+
+    </script>
+
+
+
+</body>
+</html>

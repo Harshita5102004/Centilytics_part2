@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async/Await</title>
+</head>
+<body>
+
+    <h1> Practice of async and await</h1>
+    <script>
+        // first example 
+        async function hello() {
+         return "Hello, World!";
+          }
+
+       hello().then(message => console.log(message));
+        
+
+
+      // second example
+       async function sayNAme(){
+       return "harshita , Nagar";
+        
+       }
+    let res = sayNAme().then("from bhopal");
+    console.log(res);
+
+
+
+
+
+
+
+
+
+        function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function fetchData() {
+    console.log("Fetching data...");
+    await delay(2000); 
+    console.log("Data fetched!");
+    // await delay(3000);
+    // console.log("data feteced");
+}
+
+fetchData();
+console.log("This runs while waiting for data...");
+
+
+
+
+
+
+    </script>
+    
+</body>
+</html>
