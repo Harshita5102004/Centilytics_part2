@@ -5,85 +5,136 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Finder (XHR)</title>
     <style>
+       
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             text-align: center;
             margin-top: 50px;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            color: white;
         }
+
+        h2 {
+            font-size: 28px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        
         #user-container {
             margin-top: 20px;
-            padding: 10px;
-            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
             display: inline-block;
-            min-width: 250px;
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease-in-out;
         }
+
+        #user-container:hover {
+            transform: scale(1.05);
+        }
+
+        p {
+            font-size: 18px;
+        }
+
+        strong {
+            color: #ffeb3b;
+        }
+
+        .btn {
+            margin-top: 2%;
+        }
+
+        #fetch-user {
+            background: #222;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        #fetch-user:hover {
+            background: #ffeb3b;
+            color: black;
+            transform: scale(1.1);
+        }
+
         #error {
             color: red;
             display: none;
+            font-weight: bold;
         }
+
+      
+        #loading {
+            display: none;
+            font-weight: bold;
+            font-size: 18px;
+            color: #ffeb3b;
+        }
+
     </style>
 </head>
 <body>
-
+    <hr>
     <h2>Random User Finder</h2>
-    <button id="fetch-user">Get Random User</button>
+    <hr>
+
+    <div class="btn">
+        <button id="fetch-user">Get Random User</button>
+    </div>
 
     <div id="user-container">
-        <p id="loading" style="display: none;">Loading...</p>
+        <p id="loading">Loading...</p>
         <p id="error">Failed to fetch user!</p>
         <p><strong>Name:</strong> <span id="name">-</span></p>
         <p><strong>Email:</strong> <span id="email">-</span></p>
         <p><strong>Address:</strong> <span id="address">-</span></p>
     </div>
 
-
-
-
-
-
-
-
     <script>
-        const user =  document.getElementById("fetch-user");
+        const user = document.getElementById("fetch-user");
+
         user.addEventListener("click", () => {
-    const url = "https://jsonplaceholder.typicode.com/users";
+            const url = "https://jsonplaceholder.typicode.com/users";
 
-    // Show loading text
-    document.getElementById("loading").style.display = "block";
-    document.getElementById("error").style.display = "none";
+            // Show loading text
+            document.getElementById("loading").style.display = "block";
+            document.getElementById("error").style.display = "none";
 
-    const xhr = new XMLHttpRequest();
-    xhr.open("GET", url, true);
-    xhr.responseType = "json";
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", url, true);
+            xhr.responseType = "json";
 
-    xhr.onload = function () {
+            xhr.onload = function () {
+                console.log(xhr);
+                document.getElementById("loading").style.display = "none";
 
-        console.log(xhr);
-        document.getElementById("loading").style.display = "none";
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    let users = xhr.response;
+                    let randomUser = users[Math.floor(Math.random() * users.length)];
 
-        if (xhr.status >= 200 && xhr.status < 300) {
-            let users = xhr.response;
-            let randomUser = users[Math.floor(Math.random() * users.length)];
+                    document.getElementById("name").textContent = randomUser.name;
+                    document.getElementById("email").textContent = randomUser.email;
+                    document.getElementById("address").textContent = `${randomUser.address.street}, ${randomUser.address.city}`;
+                } else {
+                    document.getElementById("error").style.display = "block";
+                }
+            };
 
-            document.getElementById("name").textContent = randomUser.name;
-            document.getElementById("email").textContent = randomUser.email;
-            document.getElementById("address").textContent = `${randomUser.address.street}, ${randomUser.address.city}`;
-        } else {
-            document.getElementById("error").style.display = "block";
-        }
-    };
+            xhr.onerror = function () {
+                document.getElementById("loading").style.display = "none";
+                document.getElementById("error").style.display = "block";
+            };
 
-    xhr.onerror = function () {
-        document.getElementById("loading").style.display = "none";
-        document.getElementById("error").style.display = "block";
-    };
-
-    xhr.send();
-});
-
+            xhr.send();
+        });
     </script>
-
-
-
 </body>
 </html>

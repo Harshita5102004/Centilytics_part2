@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Double the Numbers</title>
+</head>
+<body>
+
+    <h2>Original and Doubled Numbers</h2>
+    <ul id="result"></ul>
+    <button  class="btn"> click me </button>
+<h1 class="h1"> hello this is h1</h1>
+
+    <script>
+        const btn = document.querySelector(".btn");
+      
+            btn.addEventListener("click", function() {
+                btn.innerHTML="hello";
+            });
+
+            btn.addEventListener("click" , function(){
+                
+                btn.style.color = "blue";  
+                btn.style.backgroundColor="yellow";
+            })
+  
+       const newp = document.createElement("P");
+       newp.textContent = "this is";
+       
+       document.body.appendChild(newp);
+       
+       
+       const h1 = document.querySelector("h1");
+       h1.remove();
+    </script>
+
+</body>
+</html>
