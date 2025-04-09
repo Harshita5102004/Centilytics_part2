@@ -48,11 +48,42 @@ myPromise.then(result => {
 
     let Promise1 = new Promise((resolve, reject)=>{
         setTimeout(()=>{
-            console.log("This is my first promise");
-        },9000)
-     })
+            console.log("Promise 3 is sucesfully ");
+            resolve();
+        },3000)
+     });
     
     
      Promise1.then(function(){
-        console.log("outputis:");
+        console.log("Done 3");
+     });
+
+
+     //fourth promise 
+     let promise4 = new Promise((resolve, reject)=>{
+        setTimeout(()=>{
+            console.log("promise 4 is succesfullly");
+            resolve(); 
+        },5000)
+
+
+     });
+     promise4.then(() =>{
+        console.log("done 4");
+     });
+
+
+     // Reject a promise
+
+
+     let promise5 =new Promise((resolve, reject)=>{
+        setTimeout(()=>{
+            console.log("Promise 5 is resolve and rejected ?");
+        reject();
+        resolve();
+        } , 9000);
+     
+     });
+     promise5.catch(()=>{
+        console.log("Rejected");
      })

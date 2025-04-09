@@ -20,12 +20,17 @@
 
       // second example
        async function sayNAme(){
+       
        return "harshita , Nagar";
         
        }
-    let res = sayNAme().then("from bhopal");
-    console.log(res);
-
+      sayNAme().then((res)=>{
+        console.log(res);
+       setTimeout(()=>{
+        console.log("from bhopal");
+       },3000)
+       
+      })
 
 
 
@@ -51,8 +56,21 @@ console.log("This runs while waiting for data...");
 
 
 
+let promises = new Promise(( resolve , reject)=>{
+    let a =false;
+    if(a== true){
+        console.log("promise resolved");
+        resolve();
+    }
+    else{
+        console.log("promise is rejected");
+        reject();
+    }
+});
+  promises.catch(()=>{
 
-
+   console.log("not accepeted");
+});
 
     </script>
     
