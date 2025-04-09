@@ -9,7 +9,7 @@
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 20px;
-            background-color: #f4f4f4;
+            background-color: #746868;
         }
         .container {
             width: 50%;
@@ -30,14 +30,15 @@
             margin-bottom: 20px;
         }
         button:hover {
-            background-color: #0056b3;
+            background-color: #d41212;
         }
         .card {
-            background: #fff;
+            background: #cecdcd;
             padding: 15px;
             border-radius: 8px;
             box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
             margin: 10px 0;
+            color: rgb(0, 0, 0);
         }
     </style>
 </head>
@@ -52,8 +53,7 @@
     </div>
 
     <script>
-        // Simulating an API call to fetch user data
-        // function fetchUser() {
+        
         function fetchUser(){
             return new Promise((resolve) =>{
                 setTimeout(()=>{
@@ -62,19 +62,19 @@
             });
         }
 
-        // Simulating an API call to fetch user posts
+        
         function fetchPosts(userId) {
             return new Promise((resolve) => {
                 setTimeout(() => {
                     resolve([
-                        { id: 101, title: "Async/Await is awesome!" },
+                        { id: 101, title: "Async/Await is awesome" },
                         { id: 102, title: "JavaScript is fun!" }
                     ]);
                 }, 2000); // Simulating a 3-second delay
             });
         }
 
-        // Function to fetch and display user data
+     
         async function displayUserData() {
             let userDataDiv = document.getElementById("userData");
             let postsDiv = document.getElementById("posts");
